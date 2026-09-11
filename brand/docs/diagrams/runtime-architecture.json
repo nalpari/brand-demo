@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "brand 서비스 런타임 아키텍처",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/nalpari/brand",
+      "revision": "39eb428699507fdc22093985ff8ee8339ef872fb"
+    },
+    "views": [
+      {
+        "id": "request-path",
+        "label": "주 요청 경로",
+        "focus": [
+          "client",
+          "security",
+          "controller",
+          "service",
+          "mapper",
+          "db"
+        ],
+        "note": "익명 HTTP 요청이 sample 테이블의 행에 닿기까지의 경로."
+      },
+      {
+        "id": "input-limits",
+        "label": "입력 상한과 검증",
+        "focus": [
+          "jackson",
+          "controller",
+          "service"
+        ],
+        "note": "본문 크기는 파서에서, name 검증과 페이징은 서비스에서 결정된다."
+      },
+      {
+        "id": "ops-surface",
+        "label": "운영 엔드포인트",
+        "focus": [
+          "security",
+          "actuator",
+          "db"
+        ],
+        "note": "health 와 API 문서도 같은 열린 필터체인 위에 노출된다."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "client",
+      "type": "external",
+      "label": "HTTP 클라이언트",
+      "sublabel": "익명 · 자격증명 없음",
+      "pos": [
+        40,
+        340
+      ],
+      "size": [
+        150,
+        64
+      ]
+    },
+    {
+      "id": "security",
+      "type": "security",
+      "label": "SecurityFilterChain",
+      "sublabel": "permitAll · CSRF 비활성",
+      "tag": "임시 정책",
+      "pos": [
+        250,
+        340
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "sources": [
+        {
+          "path": "src/main/java/com/eland/brand/SecurityConfig.java",
+          "line": 14,
+          "label": "filterChain"
+        }
+      ]
+    },
+    {
+      "id": "jackson",
+      "type": "backend",
+      "label": "Jackson JsonMapper",
+      "sublabel": "maxDocumentLength 8KB",
+      "pos": [
+        500,
+        130
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "sources": [
+        {
+          "path": "src/main/java/com/eland/brand/BrandApplication.java",
+          "line": 35,
+          "label": "jsonMapperBuilder"
+        }
+      ]
+    },
+    {
+      "id": "controller",
+      "type": "backend",
+      "label": "SampleController",
+      "sublabel": "/api/samples",
+      "pos": [
+        500,
+        340
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "sources": [
+        {
+          "path": "src/main/java/com/eland/brand/sample/SampleController.java"
+        }
+      ]
+    },
+    {
+      "id": "service",
+      "type": "backend",
+      "label": "SampleService",
+      "sublabel": "검증 · keyset 페이징",
+      "pos": [
+        700,
+        340
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "sources": [
+        {
+          "path": "src/main/java/com/eland/brand/sample/SampleService.java"
+        }
+      ]
+    },
+    {
+      "id": "mapper",
+      "type": "backend",
+      "label": "SampleMapper",
+      "sublabel": "MyBatis XML",
+      "pos": [
+        900,
+        340
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "sources": [
+        {
+          "path": "src/main/resources/mapper/SampleMapper.xml"
+        }
+      ]
+    },
+    {
+      "id": "db",
+      "type": "database",
+      "label": "PostgreSQL",
+      "sublabel": "appdb.sample :5432",
+      "pos": [
+        1170,
+        340
+      ],
+      "size": [
+        150,
+        64
+      ]
+    },
+    {
+      "id": "actuator",
+      "type": "backend",
+      "label": "Actuator · springdoc",
+      "sublabel": "/actuator/health",
+      "pos": [
+        250,
+        560
+      ],
+      "size": [
+        150,
+        64
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Spring Boot 4 · JVM :8080",
+      "wraps": [
+        "security",
+        "jackson",
+        "controller",
+        "service",
+        "mapper",
+        "actuator"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "com.eland.brand.sample",
+      "wraps": [
+        "controller",
+        "service",
+        "mapper"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "client-request",
+      "from": "client",
+      "to": "security",
+      "label": "HTTP",
+      "variant": "emphasis"
+    },
+    {
+      "id": "chain-to-controller",
+      "from": "security",
+      "to": "controller",
+      "label": "인증 없이 통과",
+      "variant": "security"
+    },
+    {
+      "id": "body-binding",
+      "from": "jackson",
+      "to": "controller",
+      "label": "본문 바인딩 · 8KB 초과 시 400",
+      "labelDy": 24
+    },
+    {
+      "id": "controller-to-service",
+      "from": "controller",
+      "to": "service"
+    },
+    {
+      "id": "service-to-mapper",
+      "from": "service",
+      "to": "mapper"
+    },
+    {
+      "id": "mapper-sql",
+      "from": "mapper",
+      "to": "db",
+      "label": "SQL · where id > ?",
+      "variant": "emphasis"
+    },
+    {
+      "id": "ops-same-chain",
+      "from": "security",
+      "to": "actuator",
+      "label": "동일 필터체인",
+      "labelDy": 24
+    },
+    {
+      "id": "health-db-probe",
+      "from": "actuator",
+      "to": "db",
+      "label": "DB 도달 확인",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "요청 경로",
+      "items": [
+        "익명 HTTP 가 SecurityFilterChain 을 그대로 통과한다",
+        "요청 본문은 Jackson 이 8KB 상한으로 파싱한다",
+        "GET /api/samples 는 afterId 커서로 50건씩 반환한다"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "계층 규칙",
+      "items": [
+        "SampleController 는 라우팅과 응답 형태만 담당한다",
+        "검증과 페이징 결정은 SampleService 에 모여 있다",
+        "SQL 은 SampleMapper.xml 에만 존재한다",
+        "테스트는 SampleService 계층에만 둔다"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "보안 현황",
+      "items": [
+        "SecurityConfig 가 전 경로 permitAll · CSRF 비활성",
+        "인가 규칙이 없어 테스트할 대상도 없는 상태",
+        "Actuator 와 springdoc 도 같은 열린 체인 위에 있다"
+      ]
+    }
+  ]
+}

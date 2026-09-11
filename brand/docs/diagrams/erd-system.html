@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPAO brand mall · BO users, roles, menus and URLs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #f5f5f5;   /* white-smoke */
+      --color-ink:     #2d3142;   /* jet-black */
+      --color-muted:   #4f5d75;   /* blue-slate */
+      --color-accent:  #eb6c36;   /* atomic-tangerine */
+      --font-sans:     'Geist', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+
+    .frame { max-width: 1200px; width: 100%; }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--color-ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .sub {
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      margin-bottom: 1.5rem;
+    }
+    .sub a { color: inherit; }
+
+    svg { width: 100%; min-width: 900px; display: block; }
+    svg a.more { cursor: pointer; }
+    svg a.more text { text-decoration: underline dotted; text-underline-offset: 3px; }
+    svg a.more:hover text, svg a.more:focus-visible text { fill: var(--color-accent); }
+
+    .fk { margin-top: 2.5rem; border-top: 1px solid rgba(45,49,66,0.10); padding-top: 1rem; }
+    .fk h2 {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 0.75rem;
+    }
+    .fk table { border-collapse: collapse; width: 100%; font-size: 0.7rem; }
+    .fk th, .fk td { text-align: left; padding: 0.3rem 1rem 0.3rem 0; border-bottom: 1px solid rgba(45,49,66,0.07); vertical-align: top; }
+    .fk th {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      white-space: nowrap;
+    }
+    .fk td:first-child, .fk td:nth-child(2) { white-space: nowrap; font-weight: 500; }
+    .fk td:last-child { font-family: var(--font-mono); color: var(--color-muted); font-size: 0.66rem; }
+    .fk tr:last-child td { border-bottom: none; }
+    .fk .note { font-size: 0.7rem; color: var(--color-muted); margin-top: 0.75rem; }
+    .fk .note code { font-family: var(--font-mono); font-size: 0.92em; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">ER · SPAO FO/BO IA · BO 시스템</p>
+    <h1>Who may open which BO menu and URL</h1>
+    <p class="sub">BO 시스템관리 › 권한관리·사용자관리. Columns are a subset; the full list is in <a href="erd-schema.html">erd-schema.html</a>.</p>
+
+    <svg viewBox="0 0 1280 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="erd-system-title erd-system-desc">
+      <title id="erd-system-title">SPAO brand mall · BO users, roles, menus and URLs</title>
+      <desc id="erd-system-desc">Entity-relationship diagram: back-office users hold roles; a role grants menus and URL groups, and each URL master row belongs to one URL group.</desc>
+      <rect width="100%" height="100%" fill="#f5f5f5"/>
+      <!-- relationships (drawn before boxes) -->
+      <path d="M 240,80 L 320,80" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <path d="M 640,80 L 520,80" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <path d="M 688,164 L 688,224 Q 688,232 680,232 L 428,232 Q 420,232 420,240 L 420,260" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <path d="M 220,308 L 320,308" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <path d="M 752,164 L 752,260" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <path d="M 720,508 L 720,352" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <path d="M 620,584 L 520,584" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <!-- cardinality -->
+      <text x="256" y="74" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">1</text>
+      <text x="304" y="74" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">N</text>
+      <text x="624" y="74" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">1</text>
+      <text x="536" y="74" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">N</text>
+      <text x="696" y="184" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">1</text>
+      <text x="428" y="248" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">N</text>
+      <text x="236" y="302" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">1</text>
+      <text x="304" y="302" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">N</text>
+      <text x="760" y="184" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">1</text>
+      <text x="760" y="248" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">N</text>
+      <text x="728" y="496" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">1</text>
+      <text x="728" y="372" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">N</text>
+      <text x="604" y="578" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">1</text>
+      <text x="536" y="578" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">N</text>
+      <!-- relationship labels -->
+      <!-- entities -->
+      <!-- bo_user -->
+      <rect x="40" y="32" width="200" height="172" rx="6" fill="#f5f5f5"/>
+      <rect x="40" y="32" width="200" height="172" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="40" y="32" width="200" height="40" rx="6" fill="rgba(45,49,66,0.04)"/>
+      <rect x="40" y="64" width="200" height="8" fill="rgba(45,49,66,0.04)"/>
+      <line x1="40" y1="72" x2="240" y2="72" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+      <text x="56" y="48" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ENTITY</text>
+      <text x="56" y="64" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif">bo_user</text>
+      <text x="224" y="64" fill="#4f5d75" font-size="10" font-family="'Geist', sans-serif" text-anchor="end">BO 사용자</text>
+      <text x="56" y="88" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace"># id</text>
+      <text x="224" y="88" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="56" y="108" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">login_id</text>
+      <text x="224" y="108" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="56" y="128" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">name</text>
+      <text x="224" y="128" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="56" y="148" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">status</text>
+      <text x="224" y="148" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="56" y="168" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">account_expires_at</text>
+      <text x="224" y="168" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">date</text>
+      <a href="erd-schema.html#t-bo_user" class="more">
+        <title>bo_user: password_hash, email, extension_requested_at</title>
+        <text x="56" y="188" fill="#7a8399" font-size="10" font-family="'Geist Mono', monospace">+3 more</text>
+      </a>
+      <!-- bo_user_role -->
+      <rect x="320" y="32" width="200" height="92" rx="6" fill="#f5f5f5"/>
+      <rect x="320" y="32" width="200" height="92" rx="6" fill="rgba(45,49,66,0.04)" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3"/>
+      <rect x="320" y="32" width="200" height="40" rx="6" fill="rgba(45,49,66,0.06)"/>
+      <rect x="320" y="64" width="200" height="8" fill="rgba(45,49,66,0.06)"/>
+      <line x1="320" y1="72" x2="520" y2="72" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+      <text x="336" y="48" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">JOIN</text>
+      <text x="336" y="64" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif">bo_user_role</text>
+      <text x="504" y="64" fill="#4f5d75" font-size="10" font-family="'Geist', sans-serif" text-anchor="end">사용자·역할</text>
+      <text x="336" y="88" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">→ bo_user_id</text>
+      <text x="504" y="88" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="336" y="108" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">→ bo_role_id</text>
+      <text x="504" y="108" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <!-- bo_role -->
+      <rect x="640" y="32" width="160" height="132" rx="6" fill="#f5f5f5"/>
+      <rect x="640" y="32" width="160" height="132" rx="6" fill="rgba(235,108,54,0.04)" stroke="#eb6c36" stroke-width="1"/>
+      <rect x="640" y="32" width="160" height="40" rx="6" fill="rgba(235,108,54,0.10)"/>
+      <rect x="640" y="64" width="160" height="8" fill="rgba(235,108,54,0.10)"/>
+      <line x1="640" y1="72" x2="800" y2="72" stroke="rgba(235,108,54,0.40)" stroke-width="1"/>
+      <text x="656" y="48" fill="#eb6c36" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ENTITY · AGGREGATE ROOT</text>
+      <text x="656" y="64" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif">bo_role</text>
+      <text x="784" y="64" fill="#4f5d75" font-size="10" font-family="'Geist', sans-serif" text-anchor="end">역할</text>
+      <text x="656" y="88" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace"># id</text>
+      <text x="784" y="88" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="656" y="108" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">code</text>
+      <text x="784" y="108" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="656" y="128" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">name</text>
+      <text x="784" y="128" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="656" y="148" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">description</text>
+      <text x="784" y="148" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <!-- bo_role_menu -->
+      <rect x="320" y="260" width="200" height="92" rx="6" fill="#f5f5f5"/>
+      <rect x="320" y="260" width="200" height="92" rx="6" fill="rgba(45,49,66,0.04)" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3"/>
+      <rect x="320" y="260" width="200" height="40" rx="6" fill="rgba(45,49,66,0.06)"/>
+      <rect x="320" y="292" width="200" height="8" fill="rgba(45,49,66,0.06)"/>
+      <line x1="320" y1="300" x2="520" y2="300" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+      <text x="336" y="276" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">JOIN</text>
+      <text x="336" y="292" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif">bo_role_menu</text>
+      <text x="504" y="292" fill="#4f5d75" font-size="10" font-family="'Geist', sans-serif" text-anchor="end">역할·메뉴</text>
+      <text x="336" y="316" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">→ bo_role_id</text>
+      <text x="504" y="316" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="336" y="336" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">→ bo_menu_id</text>
+      <text x="504" y="336" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <!-- bo_menu -->
+      <rect x="60" y="260" width="160" height="192" rx="6" fill="#f5f5f5"/>
+      <rect x="60" y="260" width="160" height="192" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="60" y="260" width="160" height="40" rx="6" fill="rgba(45,49,66,0.04)"/>
+      <rect x="60" y="292" width="160" height="8" fill="rgba(45,49,66,0.04)"/>
+      <line x1="60" y1="300" x2="220" y2="300" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+      <text x="76" y="276" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ENTITY</text>
+      <text x="76" y="292" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif">bo_menu</text>
+      <text x="204" y="292" fill="#4f5d75" font-size="10" font-family="'Geist', sans-serif" text-anchor="end">BO 메뉴</text>
+      <text x="76" y="316" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace"># id</text>
+      <text x="204" y="316" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="76" y="336" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">→ parent_id</text>
+      <text x="204" y="336" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="76" y="356" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">name</text>
+      <text x="204" y="356" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="76" y="376" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">url</text>
+      <text x="204" y="376" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="76" y="396" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">depth</text>
+      <text x="204" y="396" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">smallint</text>
+      <text x="76" y="416" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">use_yn</text>
+      <text x="204" y="416" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bool</text>
+      <a href="erd-schema.html#t-bo_menu" class="more">
+        <title>bo_menu: sort_order, manual</title>
+        <text x="76" y="436" fill="#7a8399" font-size="10" font-family="'Geist Mono', monospace">+2 more</text>
+      </a>
+      <!-- bo_role_url_group -->
+      <rect x="600" y="260" width="240" height="92" rx="6" fill="#f5f5f5"/>
+      <rect x="600" y="260" width="240" height="92" rx="6" fill="rgba(45,49,66,0.04)" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3"/>
+      <rect x="600" y="260" width="240" height="40" rx="6" fill="rgba(45,49,66,0.06)"/>
+      <rect x="600" y="292" width="240" height="8" fill="rgba(45,49,66,0.06)"/>
+      <line x1="600" y1="300" x2="840" y2="300" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+      <text x="616" y="276" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">JOIN</text>
+      <text x="616" y="292" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif">bo_role_url_group</text>
+      <text x="824" y="292" fill="#4f5d75" font-size="10" font-family="'Geist', sans-serif" text-anchor="end">URL 권한</text>
+      <text x="616" y="316" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">→ bo_role_id</text>
+      <text x="824" y="316" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="616" y="336" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">→ bo_url_group_id</text>
+      <text x="824" y="336" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <!-- bo_url_group -->
+      <rect x="620" y="508" width="200" height="112" rx="6" fill="#f5f5f5"/>
+      <rect x="620" y="508" width="200" height="112" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="620" y="508" width="200" height="40" rx="6" fill="rgba(45,49,66,0.04)"/>
+      <rect x="620" y="540" width="200" height="8" fill="rgba(45,49,66,0.04)"/>
+      <line x1="620" y1="548" x2="820" y2="548" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+      <text x="636" y="524" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ENTITY</text>
+      <text x="636" y="540" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif">bo_url_group</text>
+      <text x="804" y="540" fill="#4f5d75" font-size="10" font-family="'Geist', sans-serif" text-anchor="end">URL 그룹</text>
+      <text x="636" y="564" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace"># id</text>
+      <text x="804" y="564" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="636" y="584" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">code</text>
+      <text x="804" y="584" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="636" y="604" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">name</text>
+      <text x="804" y="604" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <!-- bo_url -->
+      <rect x="320" y="508" width="200" height="152" rx="6" fill="#f5f5f5"/>
+      <rect x="320" y="508" width="200" height="152" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="320" y="508" width="200" height="40" rx="6" fill="rgba(45,49,66,0.04)"/>
+      <rect x="320" y="540" width="200" height="8" fill="rgba(45,49,66,0.04)"/>
+      <line x1="320" y1="548" x2="520" y2="548" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+      <text x="336" y="524" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ENTITY</text>
+      <text x="336" y="540" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif">bo_url</text>
+      <text x="504" y="540" fill="#4f5d75" font-size="10" font-family="'Geist', sans-serif" text-anchor="end">URL 마스터</text>
+      <text x="336" y="564" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace"># id</text>
+      <text x="504" y="564" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="336" y="584" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">→ bo_url_group_id</text>
+      <text x="504" y="584" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="336" y="604" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">url_pattern</text>
+      <text x="504" y="604" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="336" y="624" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">method</text>
+      <text x="504" y="624" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="336" y="644" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">name</text>
+      <text x="504" y="644" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <!-- legend -->
+      <line x1="40" y1="708" x2="1240" y2="708" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+      <text x="40" y="724" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.18em">LEGEND</text>
+      <rect x="40" y="740" width="14" height="10" rx="2" fill="rgba(235,108,54,0.04)" stroke="#eb6c36" stroke-width="1"/>
+      <text x="60" y="748" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Aggregate root</text>
+      <rect x="168" y="740" width="14" height="10" rx="2" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <text x="188" y="748" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Entity</text>
+      <rect x="256" y="740" width="14" height="10" rx="2" fill="rgba(45,49,66,0.04)" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="276" y="748" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Join table</text>
+      <text x="364" y="749" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace">#</text>
+      <text x="378" y="748" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Primary key</text>
+      <text x="472" y="749" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace">→</text>
+      <text x="486" y="748" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Foreign key</text>
+      <text x="580" y="749" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace">1 / N</text>
+      <text x="618" y="748" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Cardinality</text>
+    </svg>
+
+  </div>
+</body>
+</html>

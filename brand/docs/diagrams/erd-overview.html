@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPAO brand mall · domain overview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #f5f5f5;   /* white-smoke */
+      --color-ink:     #2d3142;   /* jet-black */
+      --color-muted:   #4f5d75;   /* blue-slate */
+      --color-accent:  #eb6c36;   /* atomic-tangerine */
+      --font-sans:     'Geist', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+
+    .frame { max-width: 1200px; width: 100%; }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--color-ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .sub {
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      margin-bottom: 1.5rem;
+    }
+    .sub a { color: inherit; }
+
+    svg { width: 100%; min-width: 900px; display: block; }
+    svg a.more { cursor: pointer; }
+    svg a.more text { text-decoration: underline dotted; text-underline-offset: 3px; }
+    svg a.more:hover text, svg a.more:focus-visible text { fill: var(--color-accent); }
+
+    .fk { margin-top: 2.5rem; border-top: 1px solid rgba(45,49,66,0.10); padding-top: 1rem; }
+    .fk h2 {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 0.75rem;
+    }
+    .fk table { border-collapse: collapse; width: 100%; font-size: 0.7rem; }
+    .fk th, .fk td { text-align: left; padding: 0.3rem 1rem 0.3rem 0; border-bottom: 1px solid rgba(45,49,66,0.07); vertical-align: top; }
+    .fk th {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      white-space: nowrap;
+    }
+    .fk td:first-child, .fk td:nth-child(2) { white-space: nowrap; font-weight: 500; }
+    .fk td:last-child { font-family: var(--font-mono); color: var(--color-muted); font-size: 0.66rem; }
+    .fk tr:last-child td { border-bottom: none; }
+    .fk .note { font-size: 0.7rem; color: var(--color-muted); margin-top: 0.75rem; }
+    .fk .note code { font-family: var(--font-mono); font-size: 0.92em; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">ER · SPAO FO/BO IA · 도메인 개요</p>
+    <h1>Eight aggregates behind the SPAO menu tree</h1>
+    <p class="sub">Domain-level view. 테이블 85개 전체는 <a href="erd-map.html">도메인 맵</a>에 있다. Each aggregate has its own detail ERD: <a href="erd-member.html">member</a> · <a href="erd-product.html">product</a> · <a href="erd-display.html">display</a> · <a href="erd-order.html">order</a> · <a href="erd-promotion.html">promotion</a> · <a href="erd-settlement.html">settlement</a> · <a href="erd-system.html">system</a>. Columns are a subset; the full list is in <a href="erd-schema.html">erd-schema.html</a>.</p>
+
+    <svg viewBox="0 0 1280 820" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="erd-overview-title erd-overview-desc">
+      <title id="erd-overview-title">SPAO brand mall · domain overview</title>
+      <desc id="erd-overview-desc">Entity-relationship overview: vendors supply products, display categories present them and shops stock them; members place orders that contain products; promotions apply to orders and issue coupons to members; events collect entries from members.</desc>
+      <rect width="100%" height="100%" fill="#f5f5f5"/>
+      <!-- relationships (drawn before boxes) -->
+      <path d="M 200,88 L 280,88" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <path d="M 480,88 L 560,88" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <path d="M 200,324 L 232,324 Q 240,324 240,316 L 240,176 Q 240,168 248,168 L 280,168" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <path d="M 200,388 L 280,388" fill="none" stroke="#4f5d75" stroke-width="1" stroke-dasharray="5,4"/>
+      <path d="M 380,224 L 380,280" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <path d="M 600,368 L 480,368" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <path d="M 600,316 L 520,316 Q 512,316 512,308 L 512,176 Q 512,168 504,168 L 480,168" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <path d="M 380,548 L 380,492" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <path d="M 460,636 L 520,636 Q 528,636 528,628 L 528,424 Q 528,416 536,416 L 600,416" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <path d="M 680,548 L 680,452" fill="none" stroke="#4f5d75" stroke-width="1"/>
+      <!-- cardinality -->
+      <text x="216" y="82" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">1</text>
+      <text x="264" y="82" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">N</text>
+      <text x="496" y="82" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">N</text>
+      <text x="544" y="82" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">N</text>
+      <text x="216" y="318" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">N</text>
+      <text x="264" y="162" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">N</text>
+      <text x="216" y="382" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">0..1</text>
+      <text x="264" y="382" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">N</text>
+      <text x="388" y="244" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">N</text>
+      <text x="388" y="268" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">N</text>
+      <text x="584" y="362" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">1</text>
+      <text x="496" y="362" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">N</text>
+      <text x="584" y="310" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">N</text>
+      <text x="496" y="162" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">N</text>
+      <text x="388" y="536" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">N</text>
+      <text x="388" y="512" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">N</text>
+      <text x="476" y="630" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">N</text>
+      <text x="584" y="410" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">N</text>
+      <text x="688" y="536" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">N</text>
+      <text x="688" y="472" fill="#4f5d75" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">N</text>
+      <!-- relationship labels -->
+      <rect x="212" y="94" width="56" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="240" y="103" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.12em">SUPPLIES</text>
+      <rect x="492" y="94" width="56" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="520" y="103" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.12em">DISPLAYS</text>
+      <rect x="166" y="242" width="68" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="200" y="251" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.12em">SHOP_STOCK</text>
+      <rect x="218" y="394" width="44" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="240" y="403" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.12em">PICKUP</text>
+      <rect x="306" y="246" width="68" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="340" y="255" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.12em">ORDER_ITEM</text>
+      <rect x="518" y="374" width="44" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="540" y="383" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.12em">PLACES</text>
+      <rect x="450" y="234" width="56" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="478" y="243" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.12em">WISHLIST</text>
+      <rect x="286" y="514" width="88" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="330" y="523" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.12em">ORDER_BENEFIT</text>
+      <rect x="534" y="522" width="88" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="578" y="531" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.12em">MEMBER_COUPON</text>
+      <rect x="602" y="494" width="72" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="638" y="503" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.12em">EVENT_ENTRY</text>
+      <!-- entities -->
+      <!-- vendor -->
+      <rect x="40" y="32" width="160" height="152" rx="6" fill="#f5f5f5"/>
+      <rect x="40" y="32" width="160" height="152" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="40" y="32" width="160" height="40" rx="6" fill="rgba(45,49,66,0.04)"/>
+      <rect x="40" y="64" width="160" height="8" fill="rgba(45,49,66,0.04)"/>
+      <line x1="40" y1="72" x2="200" y2="72" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+      <text x="56" y="48" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ENTITY</text>
+      <text x="56" y="64" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif">vendor</text>
+      <text x="184" y="64" fill="#4f5d75" font-size="10" font-family="'Geist', sans-serif" text-anchor="end">업체</text>
+      <text x="56" y="88" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace"># id</text>
+      <text x="184" y="88" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="56" y="108" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">code</text>
+      <text x="184" y="108" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="56" y="128" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">name</text>
+      <text x="184" y="128" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="56" y="148" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">vendor_type</text>
+      <text x="184" y="148" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <a href="erd-schema.html#t-vendor" class="more">
+        <title>vendor: parent_vendor_id, business_no, status</title>
+        <text x="56" y="168" fill="#7a8399" font-size="10" font-family="'Geist Mono', monospace">+3 more</text>
+      </a>
+      <!-- product -->
+      <rect x="280" y="32" width="200" height="192" rx="6" fill="#f5f5f5"/>
+      <rect x="280" y="32" width="200" height="192" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="280" y="32" width="200" height="40" rx="6" fill="rgba(45,49,66,0.04)"/>
+      <rect x="280" y="64" width="200" height="8" fill="rgba(45,49,66,0.04)"/>
+      <line x1="280" y1="72" x2="480" y2="72" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+      <text x="296" y="48" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ENTITY</text>
+      <text x="296" y="64" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif">product</text>
+      <text x="464" y="64" fill="#4f5d75" font-size="10" font-family="'Geist', sans-serif" text-anchor="end">상품</text>
+      <text x="296" y="88" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace"># id</text>
+      <text x="464" y="88" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="296" y="108" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">→ vendor_id</text>
+      <text x="464" y="108" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="296" y="128" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">→ std_category_id</text>
+      <text x="464" y="128" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="296" y="148" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">product_code</text>
+      <text x="464" y="148" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="296" y="168" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">name</text>
+      <text x="464" y="168" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="296" y="188" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">sale_price</text>
+      <text x="464" y="188" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">int</text>
+      <a href="erd-schema.html#t-product" class="more">
+        <title>product: product_type, source_type, list_price, sale_status, display_yn, description_html, notice_id</title>
+        <text x="296" y="208" fill="#7a8399" font-size="10" font-family="'Geist Mono', monospace">+7 more</text>
+      </a>
+      <!-- display_category -->
+      <rect x="560" y="32" width="240" height="172" rx="6" fill="#f5f5f5"/>
+      <rect x="560" y="32" width="240" height="172" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="560" y="32" width="240" height="40" rx="6" fill="rgba(45,49,66,0.04)"/>
+      <rect x="560" y="64" width="240" height="8" fill="rgba(45,49,66,0.04)"/>
+      <line x1="560" y1="72" x2="800" y2="72" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+      <text x="576" y="48" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ENTITY</text>
+      <text x="576" y="64" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif">display_category</text>
+      <text x="784" y="64" fill="#4f5d75" font-size="10" font-family="'Geist', sans-serif" text-anchor="end">전시 카테고리</text>
+      <text x="576" y="88" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace"># id</text>
+      <text x="784" y="88" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="576" y="108" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">→ parent_id</text>
+      <text x="784" y="108" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="576" y="128" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">category_type</text>
+      <text x="784" y="128" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="576" y="148" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">home_type</text>
+      <text x="784" y="148" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="576" y="168" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">name</text>
+      <text x="784" y="168" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <a href="erd-schema.html#t-display_category" class="more">
+        <title>display_category: collab_ip_id, depth, sort_order, display_yn</title>
+        <text x="576" y="188" fill="#7a8399" font-size="10" font-family="'Geist Mono', monospace">+4 more</text>
+      </a>
+      <!-- shop -->
+      <rect x="40" y="280" width="160" height="152" rx="6" fill="#f5f5f5"/>
+      <rect x="40" y="280" width="160" height="152" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="40" y="280" width="160" height="40" rx="6" fill="rgba(45,49,66,0.04)"/>
+      <rect x="40" y="312" width="160" height="8" fill="rgba(45,49,66,0.04)"/>
+      <line x1="40" y1="320" x2="200" y2="320" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+      <text x="56" y="296" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ENTITY</text>
+      <text x="56" y="312" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif">shop</text>
+      <text x="184" y="312" fill="#4f5d75" font-size="10" font-family="'Geist', sans-serif" text-anchor="end">매장</text>
+      <text x="56" y="336" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace"># id</text>
+      <text x="184" y="336" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="56" y="356" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">code</text>
+      <text x="184" y="356" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="56" y="376" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">name</text>
+      <text x="184" y="376" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="56" y="396" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">pickup_yn</text>
+      <text x="184" y="396" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bool</text>
+      <a href="erd-schema.html#t-shop" class="more">
+        <title>shop: phone, zip, address, lat, lng, open_hours, status</title>
+        <text x="56" y="416" fill="#7a8399" font-size="10" font-family="'Geist Mono', monospace">+7 more</text>
+      </a>
+      <!-- orders -->
+      <rect x="280" y="280" width="200" height="212" rx="6" fill="#f5f5f5"/>
+      <rect x="280" y="280" width="200" height="212" rx="6" fill="rgba(235,108,54,0.04)" stroke="#eb6c36" stroke-width="1"/>
+      <rect x="280" y="280" width="200" height="40" rx="6" fill="rgba(235,108,54,0.10)"/>
+      <rect x="280" y="312" width="200" height="8" fill="rgba(235,108,54,0.10)"/>
+      <line x1="280" y1="320" x2="480" y2="320" stroke="rgba(235,108,54,0.40)" stroke-width="1"/>
+      <text x="296" y="296" fill="#eb6c36" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ENTITY · AGGREGATE ROOT</text>
+      <text x="296" y="312" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif">orders</text>
+      <text x="464" y="312" fill="#4f5d75" font-size="10" font-family="'Geist', sans-serif" text-anchor="end">주문</text>
+      <text x="296" y="336" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace"># id</text>
+      <text x="464" y="336" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="296" y="356" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">order_no</text>
+      <text x="464" y="356" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="296" y="376" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">→ member_id</text>
+      <text x="464" y="376" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="296" y="396" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">→ pickup_shop_id</text>
+      <text x="464" y="396" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="296" y="416" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">order_type</text>
+      <text x="464" y="416" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="296" y="436" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">status</text>
+      <text x="464" y="436" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="296" y="456" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">pay_amount</text>
+      <text x="464" y="456" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">int</text>
+      <a href="erd-schema.html#t-orders" class="more">
+        <title>orders: guest_name, guest_phone, guest_password_hash, channel_id, item_amount, discount_amount, delivery_fee, terms_agreed_at, ordered_at</title>
+        <text x="296" y="476" fill="#7a8399" font-size="10" font-family="'Geist Mono', monospace">+9 more</text>
+      </a>
+      <!-- member -->
+      <rect x="600" y="280" width="160" height="172" rx="6" fill="#f5f5f5"/>
+      <rect x="600" y="280" width="160" height="172" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="600" y="280" width="160" height="40" rx="6" fill="rgba(45,49,66,0.04)"/>
+      <rect x="600" y="312" width="160" height="8" fill="rgba(45,49,66,0.04)"/>
+      <line x1="600" y1="320" x2="760" y2="320" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+      <text x="616" y="296" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ENTITY</text>
+      <text x="616" y="312" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif">member</text>
+      <text x="744" y="312" fill="#4f5d75" font-size="10" font-family="'Geist', sans-serif" text-anchor="end">회원</text>
+      <text x="616" y="336" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace"># id</text>
+      <text x="744" y="336" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="616" y="356" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">login_id</text>
+      <text x="744" y="356" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="616" y="376" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">name</text>
+      <text x="744" y="376" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="616" y="396" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">grade_code</text>
+      <text x="744" y="396" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="616" y="416" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">status</text>
+      <text x="744" y="416" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <a href="erd-schema.html#t-member" class="more">
+        <title>member: password_hash, phone, email, birth_date, gender, favorite_shop_id, marketing_agree, password_changed_at, withdraw_requested_at</title>
+        <text x="616" y="436" fill="#7a8399" font-size="10" font-family="'Geist Mono', monospace">+9 more</text>
+      </a>
+      <!-- promotion -->
+      <rect x="300" y="548" width="160" height="172" rx="6" fill="#f5f5f5"/>
+      <rect x="300" y="548" width="160" height="172" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="300" y="548" width="160" height="40" rx="6" fill="rgba(45,49,66,0.04)"/>
+      <rect x="300" y="580" width="160" height="8" fill="rgba(45,49,66,0.04)"/>
+      <line x1="300" y1="588" x2="460" y2="588" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+      <text x="316" y="564" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ENTITY</text>
+      <text x="316" y="580" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif">promotion</text>
+      <text x="444" y="580" fill="#4f5d75" font-size="10" font-family="'Geist', sans-serif" text-anchor="end">프로모션</text>
+      <text x="316" y="604" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace"># id</text>
+      <text x="444" y="604" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="316" y="624" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">name</text>
+      <text x="444" y="624" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="316" y="644" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">promo_type</text>
+      <text x="444" y="644" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="316" y="664" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">discount_type</text>
+      <text x="444" y="664" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="316" y="684" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">status</text>
+      <text x="444" y="684" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <a href="erd-schema.html#t-promotion" class="more">
+        <title>promotion: discount_value, min_order_amount, max_discount, gift_product_id, channel_id, start_at, end_at, approved_by, approved_at</title>
+        <text x="316" y="704" fill="#7a8399" font-size="10" font-family="'Geist Mono', monospace">+9 more</text>
+      </a>
+      <!-- event -->
+      <rect x="600" y="548" width="160" height="172" rx="6" fill="#f5f5f5"/>
+      <rect x="600" y="548" width="160" height="172" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="600" y="548" width="160" height="40" rx="6" fill="rgba(45,49,66,0.04)"/>
+      <rect x="600" y="580" width="160" height="8" fill="rgba(45,49,66,0.04)"/>
+      <line x1="600" y1="588" x2="760" y2="588" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+      <text x="616" y="564" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ENTITY</text>
+      <text x="616" y="580" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif">event</text>
+      <text x="744" y="580" fill="#4f5d75" font-size="10" font-family="'Geist', sans-serif" text-anchor="end">이벤트</text>
+      <text x="616" y="604" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace"># id</text>
+      <text x="744" y="604" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">bigint</text>
+      <text x="616" y="624" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">title</text>
+      <text x="744" y="624" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="616" y="644" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">entry_mode</text>
+      <text x="744" y="644" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="616" y="664" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">entry_type</text>
+      <text x="744" y="664" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <text x="616" y="684" fill="#2d3142" font-size="10" font-family="'Geist Mono', monospace">status</text>
+      <text x="744" y="684" fill="#4f5d75" font-size="10" font-family="'Geist Mono', monospace" text-anchor="end">text</text>
+      <a href="erd-schema.html#t-event" class="more">
+        <title>event: event_html_id, start_at, end_at, copied_from_id</title>
+        <text x="616" y="704" fill="#7a8399" font-size="10" font-family="'Geist Mono', monospace">+4 more</text>
+      </a>
+      <!-- legend -->
+      <line x1="40" y1="768" x2="1240" y2="768" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+      <text x="40" y="784" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.18em">LEGEND</text>
+      <rect x="40" y="800" width="14" height="10" rx="2" fill="rgba(235,108,54,0.04)" stroke="#eb6c36" stroke-width="1"/>
+      <text x="60" y="808" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Aggregate root</text>
+      <rect x="168" y="800" width="14" height="10" rx="2" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <text x="188" y="808" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Entity</text>
+      <text x="256" y="809" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace">#</text>
+      <text x="270" y="808" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Primary key</text>
+      <text x="364" y="809" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace">→</text>
+      <text x="378" y="808" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Foreign key</text>
+      <text x="472" y="809" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace">1 / N</text>
+      <text x="510" y="808" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Cardinality</text>
+      <line x1="604" y1="805" x2="628" y2="805" stroke="#4f5d75" stroke-width="1" stroke-dasharray="5,4"/>
+      <text x="634" y="808" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Optional (0..1)</text>
+    </svg>
+
+  </div>
+</body>
+</html>

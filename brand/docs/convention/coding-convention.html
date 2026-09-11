@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>brand 코딩 컨벤션</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  /* ---- light palette: complete token set on bare :root ---- */
+  :root {
+    --ground:      #f1f4f3;
+    --surface:     #ffffff;
+    --surface-alt: #e9edec;
+    --ink:         #17201e;
+    --ink-soft:    #596764;
+    --ink-faint:   #7f8c89;
+    --rule:        #d7dedc;
+    --rule-strong: #b9c4c1;
+    --accent:      #0f6b5c;
+    --accent-soft: #e0eeea;
+    --warn:        #8a5311;
+    --warn-soft:   #f6ecdd;
+    --shadow:      0 1px 2px rgba(23, 32, 30, .05);
+
+    --sans: "IBM Plex Sans KR", system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  /* ---- dark: redefine tokens only ---- */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:      #0e1514;
+      --surface:     #161f1d;
+      --surface-alt: #1d2725;
+      --ink:         #e4eae8;
+      --ink-soft:    #97a5a1;
+      --ink-faint:   #74827f;
+      --rule:        #26302e;
+      --rule-strong: #38443f;
+      --accent:      #4ec9b0;
+      --accent-soft: #16302b;
+      --warn:        #d99a4e;
+      --warn-soft:   #2c2216;
+      --shadow:      0 1px 2px rgba(0, 0, 0, .3);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:      #0e1514;
+    --surface:     #161f1d;
+    --surface-alt: #1d2725;
+    --ink:         #e4eae8;
+    --ink-soft:    #97a5a1;
+    --ink-faint:   #74827f;
+    --rule:        #26302e;
+    --rule-strong: #38443f;
+    --accent:      #4ec9b0;
+    --accent-soft: #16302b;
+    --warn:        #d99a4e;
+    --warn-soft:   #2c2216;
+    --shadow:      0 1px 2px rgba(0, 0, 0, .3);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.72;
+    font-weight: 400;
+  }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* ---- shell ---- */
+  .shell {
+    display: grid;
+    grid-template-columns: 232px minmax(0, 1fr);
+    gap: 56px;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 32px 120px;
+  }
+
+  /* ---- side nav ---- */
+  .nav {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    max-height: 100vh;
+    overflow-y: auto;
+    padding: 48px 0;
+  }
+  .nav-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 14px;
+  }
+  .nav ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1px; }
+  .nav a {
+    display: block;
+    padding: 5px 12px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-left: 2px solid var(--rule);
+  }
+  .nav a:hover { color: var(--ink); background: var(--surface-alt); }
+  .nav a[aria-current="true"] {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 600;
+    background: var(--accent-soft);
+  }
+
+  /* ---- main column ---- */
+  main { padding: 48px 0 0; max-width: 72ch; }
+
+  header.page { padding-bottom: 40px; border-bottom: 1px solid var(--rule-strong); margin-bottom: 8px; }
+  .kicker {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+  h1 {
+    font-size: 40px;
+    line-height: 1.18;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    margin: 0 0 16px;
+    text-wrap: balance;
+  }
+  .standfirst { font-size: 17px; color: var(--ink-soft); margin: 0; max-width: 60ch; }
+
+  section { padding-top: 52px; }
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -.012em;
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+  .sec-note { color: var(--ink-soft); font-size: 15px; margin: 0 0 24px; }
+  h3 {
+    font-size: 16.5px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    letter-spacing: -.005em;
+    text-wrap: balance;
+  }
+  p { margin: 0 0 14px; }
+  p:last-child { margin-bottom: 0; }
+
+  .rules { display: flex; flex-direction: column; gap: 26px; }
+  .rule > :last-child { margin-bottom: 0; }
+
+  /* the real structure of this doc: a rule, then why it exists */
+  .why {
+    border-left: 2px solid var(--rule-strong);
+    padding: 2px 0 2px 14px;
+    margin: 12px 0 0;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+  .why b {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* callout for the one thing that is not a style rule but a hazard */
+  .hazard {
+    background: var(--warn-soft);
+    border: 1px solid color-mix(in srgb, var(--warn) 28%, transparent);
+    border-radius: 4px;
+    padding: 16px 18px;
+    margin: 24px 0 0;
+    font-size: 15.5px;
+  }
+  .hazard b {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--warn);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ---- code ---- */
+  pre {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin: 14px 0;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 13.5px;
+    line-height: 1.66;
+    box-shadow: var(--shadow);
+    tab-size: 4;
+  }
+  pre .cmt { color: var(--ink-faint); }
+  code {
+    font-family: var(--mono);
+    font-size: .875em;
+    background: var(--surface-alt);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+  pre code { background: none; padding: 0; font-size: inherit; }
+
+  /* ---- citations ---- */
+  .cites { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0; padding: 0; list-style: none; }
+  .cites a {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.5;
+    padding: 2px 7px;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    background: var(--surface);
+    color: var(--ink-soft);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .cites a:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ---- tables ---- */
+  .tw { overflow-x: auto; margin: 16px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 14.5px; min-width: 460px; }
+  th, td { text-align: left; padding: 9px 14px 9px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    border-bottom-color: var(--rule-strong);
+    white-space: nowrap;
+  }
+  td code { font-size: 12.5px; }
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* ---- lists ---- */
+  ul.plain { margin: 0 0 14px; padding-left: 20px; }
+  ul.plain li { margin-bottom: 7px; }
+  ul.plain li:last-child { margin-bottom: 0; }
+
+  footer {
+    margin-top: 72px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+    font-size: 14px;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 900px) {
+    .shell { grid-template-columns: 1fr; gap: 0; padding: 0 22px 80px; }
+    .nav {
+      position: static;
+      max-height: none;
+      padding: 32px 0 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav ol { flex-direction: row; flex-wrap: wrap; gap: 6px; padding-bottom: 20px; }
+    .nav a { border-left: none; border: 1px solid var(--rule); border-radius: 3px; padding: 4px 10px; font-size: 13px; }
+    .nav a[aria-current="true"] { border-color: var(--accent); }
+    main { padding-top: 32px; }
+    h1 { font-size: 31px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+  section { scroll-margin-top: 24px; }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <nav class="nav" aria-label="목차">
+    <p class="nav-eyebrow">목차</p>
+    <ol>
+      <li><a href="#scope">다루지 않는 것</a></li>
+      <li><a href="#format">서식</a></li>
+      <li><a href="#visibility">가시성</a></li>
+      <li><a href="#constants">상수</a></li>
+      <li><a href="#absence">없음을 다루는 방식</a></li>
+      <li><a href="#guards">검증 가드</a></li>
+      <li><a href="#tx">트랜잭션</a></li>
+      <li><a href="#tests">테스트</a></li>
+      <li><a href="#commits">커밋 메세지</a></li>
+      <li><a href="#sync">바꿀 때 같이 할 것</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <header class="page">
+      <p class="kicker">com.eland.brand</p>
+      <h1>코딩 컨벤션</h1>
+      <p class="standfirst">
+        이 저장소의 코드가 실제로 어떤 모양인지를 적은 문서다. 규칙을 새로 만든 게 아니라
+        <code>src/</code> 를 읽어 이미 예외 없이 지켜지고 있는 것만 옮겨 적었고, 항목마다 근거가 되는
+        파일과 줄을 달았다. 리뷰에서 “이건 왜 이렇게 썼냐”는 질문이 나올 만한 지점만 다룬다.
+      </p>
+      <div class="hazard">
+        <b>강제하는 도구가 없다</b>
+        린터도 포매터도 설정되어 있지 않다. 아래 규칙을 검사해 주는 건 아무것도 없고, 지금까지는
+        사람이 기존 코드를 보고 맞춰 왔다. 그래서 이 문서가 필요하다.
+      </div>
+    </header>
+
+    <section id="scope">
+      <h2>이 문서가 다루지 않는 것</h2>
+      <p class="sec-note">한 사실은 한 곳에만 둔다. 아래는 각자의 자리가 있으니 여기서 반복하지 않는다.</p>
+      <div class="tw">
+        <table>
+          <thead><tr><th>알고 싶은 것</th><th>볼 곳</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>빌드·테스트 명령, 테스트 배치 정책, MyBatis 함정, Boot 4 패키지 이동, 보안 현황</td>
+              <td><a href="../../CLAUDE.md"><code>CLAUDE.md</code></a></td>
+            </tr>
+            <tr>
+              <td>테이블 컬럼과 의미, 엔드포인트 계약과 상태코드</td>
+              <td><a href="../../okf/index.md"><code>okf/</code></a></td>
+            </tr>
+            <tr>
+              <td>런타임 구조 한눈에 보기</td>
+              <td><a href="../diagrams/"><code>docs/diagrams/</code></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="why">
+        <b>왜</b>
+        <code>CLAUDE.md</code> 는 매 세션 전체가 읽히는 파일이라 짧게 유지해야 하고, <code>okf/</code> 는
+        계약의 단일 출처다. 여기에 그 내용을 복사하면 두 곳이 서로 다르게 썩는다.
+      </p>
+    </section>
+
+    <section id="format">
+      <h2>서식</h2>
+      <div class="rules">
+
+        <div class="rule">
+          <h3>Java 와 XML 은 탭, YAML 은 스페이스 2칸</h3>
+          <p>Spring Initializr 기본값을 그대로 쓰고 있고 8개 자바 파일 전부 예외가 없다. 에디터가 탭을
+          스페이스로 바꾸지 않는지 확인할 것.</p>
+        </div>
+
+        <div class="rule">
+          <h3>여는 중괄호 다음 줄과 닫는 중괄호 앞 줄은 비운다</h3>
+          <p>클래스든 인터페이스든, 8개 자바 파일 전부 그렇다.</p>
+<pre><code>public class SampleService {
+
+	private static final int PAGE_SIZE = 50;
+	…
+
+}</code></pre>
+        </div>
+
+        <div class="rule">
+          <h3>import 는 최상위 패키지별로 묶고 그룹 사이를 빈 줄로 나눈다</h3>
+          <p>그룹 안은 알파벳 순. 순서는 <code>java.*</code> → <code>org.*</code> → 그 외
+          (<code>tools.*</code>, <code>com.*</code>). 테스트에서는 static import 가 맨 위.</p>
+          <ul class="cites">
+            <li><a href="../../src/main/java/com/eland/brand/sample/SampleController.java">SampleController.java:3–17</a></li>
+            <li><a href="../../src/main/java/com/eland/brand/BrandApplication.java">BrandApplication.java:3–11</a></li>
+          </ul>
+        </div>
+
+        <div class="rule">
+          <h3>와일드카드 import 를 쓰지 않는다</h3>
+          <p><code>SampleController</code> 는 <code>org.springframework.web.bind.annotation</code> 에서
+          10개를 개별로 가져온다.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="visibility">
+      <h2>가시성</h2>
+      <p class="sec-note">클래스는 <code>public</code>, 생성자와 <code>@Bean</code> 메서드는 package-private.</p>
+      <div class="rules">
+
+        <div class="rule">
+<pre><code>public class SampleService {
+	SampleService(SampleMapper mapper) {   <span class="cmt">// public 아님</span>
+		this.mapper = mapper;
+	}
+}</code></pre>
+          <p class="why">
+            <b>왜</b>
+            스프링은 리플렉션으로 호출하므로 <code>public</code> 이 필요 없고, 좁은 가시성이
+            “이건 컨테이너가 부르는 것”이라는 신호가 된다.
+          </p>
+          <ul class="cites">
+            <li><a href="../../src/main/java/com/eland/brand/sample/SampleService.java">SampleService.java:19</a></li>
+            <li><a href="../../src/main/java/com/eland/brand/sample/SampleController.java">SampleController.java:25</a></li>
+            <li><a href="../../src/main/java/com/eland/brand/SecurityConfig.java">SecurityConfig.java:14</a></li>
+            <li><a href="../../src/main/java/com/eland/brand/BrandApplication.java">BrandApplication.java:36</a></li>
+          </ul>
+        </div>
+
+        <div class="rule">
+          <h3>생성자에 <code>@Autowired</code> 를 붙이지 않는다</h3>
+          <p>생성자가 하나면 스프링이 알아서 쓴다. 운영 코드의 의존성은 <code>private final</code> 필드 +
+          생성자 주입이고, 필드 주입은 쓰지 않는다.</p>
+        </div>
+
+        <div class="rule">
+          <h3>테스트만 <code>@Autowired</code> 필드 주입을 쓴다</h3>
+          <p>스프링 테스트도 생성자 주입이 되긴 하지만, 이 저장소는 필드 주입으로 통일되어 있다.</p>
+          <ul class="cites">
+            <li><a href="../../src/test/java/com/eland/brand/sample/SampleServiceTest.java">SampleServiceTest.java:23</a></li>
+          </ul>
+        </div>
+
+        <div class="rule">
+          <h3>테스트 클래스·메서드와 헬퍼는 좁게</h3>
+          <p>테스트 클래스와 테스트 메서드는 package-private — JUnit 5 는 <code>public</code> 을 요구하지
+          않는다. 클래스 내부 헬퍼는 <code>private</code>
+          (<code>SampleService</code> 의 <code>requireName</code>).</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="constants">
+      <h2>상수</h2>
+      <p class="sec-note">숫자에 이름을 붙여 클래스 맨 위에 <code>private static final</code> 로 둔다. 항목 사이는 빈 줄로 띄운다.</p>
+      <div class="rules">
+
+        <div class="rule">
+<pre><code>private static final int PAGE_SIZE = 50;
+
+private static final int MAX_NAME_LENGTH = 20;</code></pre>
+        </div>
+
+        <div class="rule">
+          <h3>계산식이 의미를 더 잘 드러내면 계산식 그대로 둔다</h3>
+          <p><code>MAX_REQUEST_BODY_BYTES = 8 * 1024</code> 는 <code>8192</code> 보다 읽기 쉽다.</p>
+          <ul class="cites">
+            <li><a href="../../src/main/java/com/eland/brand/BrandApplication.java">BrandApplication.java:16</a></li>
+          </ul>
+        </div>
+
+        <div class="rule">
+          <h3>에러 메세지에 값을 다시 적지 말고 상수를 넣는다</h3>
+<pre><code>"name must be at most " + MAX_NAME_LENGTH + " characters"</code></pre>
+          <p class="why">
+            <b>왜</b>
+            상한을 바꿀 때 메세지가 같이 따라온다. 값을 문자열에 박아 두면 둘이 어긋난 채로 배포된다.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="absence">
+      <h2>없음을 다루는 방식</h2>
+      <p class="sec-note">
+        이 프로젝트에는 <code>@RestControllerAdvice</code> 도 DTO 도 없다. 그래서 “없는 행”과
+        “잘못된 입력”이 각각 어디서 어떤 모양으로 처리되는지가 고정되어 있다.
+      </p>
+      <div class="tw">
+        <table>
+          <thead>
+            <tr><th>상황</th><th>서비스</th><th>컨트롤러</th><th>결과</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>행이 없음</td>
+              <td><code>null</code> 반환<br><span style="color:var(--ink-faint)">findById, update</span></td>
+              <td><code>ResponseEntity.of(Optional.ofNullable(…))</code></td>
+              <td><code>404</code></td>
+            </tr>
+            <tr>
+              <td>삭제 대상 없음</td>
+              <td><code>false</code> 반환</td>
+              <td><code>notFound().build()</code></td>
+              <td><code>404</code></td>
+            </tr>
+            <tr>
+              <td>입력이 잘못됨</td>
+              <td><code>ResponseStatusException</code> 던짐</td>
+              <td>아무것도 안 함</td>
+              <td><code>400</code> + RFC 9457</td>
+            </tr>
+            <tr>
+              <td>일어나면 안 되는 일</td>
+              <td><code>IllegalStateException</code> 던짐</td>
+              <td>아무것도 안 함</td>
+              <td><code>500</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="rules" style="margin-top:26px">
+
+        <div class="rule">
+          <h3>“없음”은 예외가 아니라 <code>null</code></h3>
+          <p>서비스는 조회 실패에 예외를 던지지 않고 <code>Optional</code> 을 반환하지도 않는다.
+          컨트롤러가 감싼다.</p>
+          <ul class="cites">
+            <li><a href="../../src/main/java/com/eland/brand/sample/SampleController.java">SampleController.java:36</a></li>
+          </ul>
+        </div>
+
+        <div class="rule">
+          <h3>입력 검증은 서비스에서 던진다</h3>
+          <p>컨트롤러에 검증을 두면 이 프로젝트의 테스트 배치 정책상 테스트할 방법이 없다.
+          <code>spring-boot-starter-validation</code> 이 의존성에 없으므로 <code>@Valid</code> 도 쓸 수 없다.</p>
+        </div>
+
+        <div class="rule">
+          <h3>400 과 500 을 구분해서 던진다</h3>
+          <p>호출자가 고칠 수 있으면 <code>ResponseStatusException</code>, 코드나 DB 상태가 잘못된
+          것이면 <code>IllegalStateException</code>.</p>
+          <p class="why">
+            <b>왜</b>
+            후자를 400 으로 던지면 우리 버그를 사용자 잘못으로 보고하게 된다.
+          </p>
+          <ul class="cites">
+            <li><a href="../../src/main/java/com/eland/brand/sample/SampleService.java">SampleService.java:34–36</a></li>
+          </ul>
+        </div>
+
+        <div class="rule">
+          <h3>에러 메세지는 영어 소문자 평서문</h3>
+          <p><code>"name is required"</code>, <code>"name must not contain NUL"</code>.
+          이 문자열은 API 응답의 <code>detail</code> 로 그대로 나가므로 사용자에게 보이는 문구다.
+          바꾸면 <a href="../../okf/api/samples.md"><code>okf/api/samples.md</code></a> 도 같이 고친다.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="guards">
+      <h2>검증 가드</h2>
+      <p class="sec-note">여러 조건을 검사할 때는 비용이 낮은 검사를 먼저 둔다.</p>
+<pre><code>private void requireName(String name) {
+	<span class="cmt">// 길이 먼저 — 이 아래는 20 코드포인트 이하가 보장된 문자열만 본다</span>
+	if (name != null &amp;&amp; name.codePointCount(0, name.length()) &gt; MAX_NAME_LENGTH) { … }
+	if (name == null || name.replaceAll("[\\p{Z}\\p{C}]", "").isEmpty()) { … }
+	if (name.indexOf('\0') &gt;= 0) { … }
+}</code></pre>
+      <p class="why">
+        <b>왜</b>
+        <code>replaceAll</code> 은 호출마다 정규식을 컴파일하고 결과 문자열을 새로 만든다. 길이 검사가
+        뒤에 있으면 익명 호출자가 보낸 거대한 문자열이 그 비용을 전부 치른 뒤에야 400 이 된다.
+      </p>
+      <ul class="cites">
+        <li><a href="../../src/main/java/com/eland/brand/sample/SampleService.java">SampleService.java:51–62</a></li>
+      </ul>
+    </section>
+
+    <section id="tx">
+      <h2>트랜잭션</h2>
+      <p><code>@Transactional</code> 은 쓰기 메서드에만 붙인다. <code>create</code>, <code>update</code>,
+      <code>delete</code> 에 있고 <code>findPage</code>, <code>findById</code> 에는 없다. 읽기 전용 조회에
+      트랜잭션을 열 이유가 없다.</p>
+      <p class="why">
+        <b>왜</b>
+        <code>update</code> 처럼 “쓰고 나서 다시 읽어 반환”하는 메서드는 반드시 트랜잭션 안에 있어야
+        같은 트랜잭션의 변경을 읽는다.
+      </p>
+    </section>
+
+    <section id="tests">
+      <h2>테스트</h2>
+      <p class="sec-note">
+        테스트를 <em>어디에</em> 두는지는 <a href="../../CLAUDE.md"><code>CLAUDE.md</code></a> 가 정한다.
+        여기서는 <em>어떻게 쓰는지</em>만 다룬다.
+      </p>
+      <div class="rules">
+
+        <div class="rule">
+          <h3>AssertJ 만 쓴다</h3>
+          <p>JUnit 의 <code>assertEquals</code> / <code>assertTrue</code> 계열은 저장소에 한 번도 등장하지
+          않는다. <code>assertThat</code>, <code>assertThatThrownBy</code> 를 static import 로 가져온다.</p>
+        </div>
+
+        <div class="rule">
+          <h3>메서드 이름은 문장으로 쓴다</h3>
+          <p>동작과 기대가 둘 다 들어간다.</p>
+<pre><code>createRejectsBlankName
+findPageHoldsFiftyRowsAndTheCursorAdvancesPastThem
+deletingARowBeforeTheCursorDoesNotSkipTheNextPage</code></pre>
+          <p class="why">
+            <b>왜</b>
+            <code>testCreate1</code>, <code>createTest</code> 같은 이름은 실패했을 때 무엇이 깨졌는지
+            알려주지 못한다.
+          </p>
+        </div>
+
+        <div class="rule">
+          <h3>상태코드는 이 관용구로 검증한다</h3>
+<pre><code>assertThatThrownBy(() -&gt; service.create(sample(" ")))
+	.isInstanceOf(ResponseStatusException.class)
+	.extracting(e -&gt; ((ResponseStatusException) e).getStatusCode())
+	.isEqualTo(HttpStatus.BAD_REQUEST);</code></pre>
+          <p class="why">
+            <b>왜</b>
+            예외 타입만 보면 400 과 404 를 구분하지 못한다. 둘 다
+            <code>ResponseStatusException</code> 이다.
+          </p>
+        </div>
+
+        <div class="rule">
+          <h3>영향 범위는 무고한 행으로 증명한다</h3>
+          <p>“하나를 바꿨더니 하나만 바뀌었다”를 확인하는 방법이다.</p>
+<pre><code>Sample created = service.create(sample("before"));
+Sample bystander = service.create(sample("bystander"));
+…
+assertThat(service.findById(bystander.getId()).getName()).isEqualTo("bystander");</code></pre>
+        </div>
+
+        <div class="rule">
+          <h3>생성 헬퍼는 <code>private</code> 로 클래스 맨 아래에</h3>
+          <p><code>SampleServiceTest</code> 의 <code>sample(String name)</code>.</p>
+        </div>
+
+        <div class="rule">
+          <h3>테스트는 실제 DB 를 쓴다</h3>
+          <p>매퍼를 목으로 대체하지 않는다. 이유는 <a href="../../CLAUDE.md"><code>CLAUDE.md</code></a> 에 있다.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="commits">
+      <h2>커밋 메세지</h2>
+      <p class="sec-note">영어 type 접두사 + 한글 subject. <code>git log</code> 전체가 이 형식이다.</p>
+<pre><code>feat: /api/samples 에 keyset 페이지네이션과 입력 상한 추가
+
+익명으로 호출되는 엔드포인트라 전체 목록 조회도 무제한 name 도
+그대로 부하가 된다. …</code></pre>
+      <ul class="plain">
+        <li>type: <code>feat</code> <code>fix</code> <code>refactor</code> <code>style</code>
+            <code>docs</code> <code>chore</code> <code>test</code></li>
+        <li>subject 50자 이내, “무엇을 했는지”</li>
+        <li>body 는 선택이지만, <strong>왜 그렇게 했는지</strong>를 적을 값이 있으면 적는다.
+            무엇을 했는지는 diff 가 이미 말해준다.</li>
+        <li>커밋은 파일이 아니라 <strong>의도</strong> 단위로 나눈다. 한 줄로 설명되지 않으면 두 개다.</li>
+      </ul>
+    </section>
+
+    <section id="sync">
+      <h2>코드를 바꿀 때 같이 해야 하는 것</h2>
+      <p><code>okf/</code> 번들은 아무것도 빌드하지 않고 아무것도 검사하지 않는다. 그래서 코드와
+      어긋나도 조용히 틀린 채로 남는다. 무엇을 바꿨을 때 무엇을 고쳐야 하는지는
+      <a href="../../CLAUDE.md"><code>CLAUDE.md</code></a> 의 표에 있다. PR 을 올리기 전에 그 표를 확인할 것.</p>
+    </section>
+
+    <footer>
+      근거는 <code>src/</code> 를 직접 읽어 확인했다. 코드가 바뀌어 이 문서와 어긋나면, 문서가 아니라
+      먼저 코드를 보라 — 이 문서는 관찰의 기록이지 명령이 아니다.
+    </footer>
+  </main>
+
+</div>
+
+<script>
+  // 목차가 현재 읽는 절을 따라간다 — 훑어보는 문서라 위치 표시가 실제로 쓸모 있다
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+    var map = {};
+    links.forEach(function (a) {
+      var el = document.querySelector(a.getAttribute('href'));
+      if (el) { map[el.id] = a; }
+    });
+    var sections = Object.keys(map).map(function (id) { return document.getElementById(id); });
+    if (!sections.length || !('IntersectionObserver' in window)) { return; }
+
+    var visible = new Set();
+    function paint() {
+      var current = sections.filter(function (s) { return visible.has(s.id); })[0];
+      links.forEach(function (a) { a.removeAttribute('aria-current'); });
+      if (current) { map[current.id].setAttribute('aria-current', 'true'); }
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { visible.add(e.target.id); } else { visible.delete(e.target.id); }
+      });
+      paint();
+    }, { rootMargin: '0px 0px -70% 0px' });
+    sections.forEach(function (s) { io.observe(s); });
+  })();
+</script>
+
+</body>
+</html>
