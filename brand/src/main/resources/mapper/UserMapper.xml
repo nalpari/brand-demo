@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eland.brand.auth.UserMapper">
+
+	<sql id="columns">id, username, password_hash, role, created_at, password_changed_at</sql>
+
+	<select id="currentInstant" resultType="java.time.OffsetDateTime">
+		select clock_timestamp()
+	</select>
+
+	<select id="findByUsername" resultType="User">
+		select <include refid="columns"/> from users where username = #{username}
+	</select>
+
+	<select id="findById" resultType="User">
+		select <include refid="columns"/> from users where id = #{id}
+	</select>
+
+	<!-- The database-defaulted columns come back from the same RETURNING clause the
+	     generated key already uses, so signup does not need a second SELECT to read them.
+	     keyColumn stays paired with keyProperty positionally: without it pgjdbc emits
+	     RETURNING * and MyBatis binds by declaration order rather than by name. -->
+	<insert id="insert" parameterType="User" useGeneratedKeys="true"
+			keyProperty="id,role,createdAt,passwordChangedAt"
+			keyColumn="id,role,created_at,password_changed_at">
+		insert into users (username, password_hash) values (#{username}, #{passwordHash})
+	</insert>
+
+	<update id="updatePassword">
+		<!-- clock_timestamp(), not now(): now() is the transaction's start time, and this
+		     runs inside changePassword's transaction after two BCrypt rounds. Stamping the
+		     revocation cutoff ~200ms early leaves a window where a login with the old
+		     password gets an iat that is not before the cutoff, so its token survives. -->
+		<!-- password_hash in the predicate, not just id: the service read the row and then
+		     spent two BCrypt rounds on it, and a change that commits in that gap must not be
+		     overwritten by a caller whose proof is now stale. 0 rows is that case, and the
+		     row being gone, both of which the service turns into 409. -->
+		update users set password_hash = #{passwordHash}, password_changed_at = clock_timestamp()
+		where id = #{id} and password_hash = #{expectedHash}
+	</update>
+
+	<delete id="deleteById">
+		delete from users where id = #{id}
+	</delete>
+
+</mapper>

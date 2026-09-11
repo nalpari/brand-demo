@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: brand
+  # Loads JWT_SECRET (and anything else) from an untracked .env when one is present.
+  # `optional:` so a checkout without the file boots unchanged — the secret then falls back
+  # to the random-per-boot key and its WARN, which is the documented developer default.
+  config:
+    import: optional:file:.env[.properties]
+  mvc:
+    problemdetails:
+      enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/appdb
+    username: app
+    password: app
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.eland.brand
+  configuration:
+    map-underscore-to-camel-case: true
+
+jwt:
+  secret: ${JWT_SECRET:}
+
+cors:
+  # Comma-separated browser origins allowed to call /api/**, exact scheme+host+port.
+  # Empty is same-origin only: no Access-Control-* header is sent and the browser
+  # discards a cross-origin response, which is how this API behaved before.
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:}

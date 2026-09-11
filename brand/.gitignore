@@ -1,0 +1,51 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Archify 검증 산출물 (재생성 가능) ###
+docs/diagrams/*.visual-check.*
+
+### 에이전트 설정 (로컬 전용) ###
+.serena/
+.claude/
+.codex/
+.agent/
+
+### 로컬 시크릿 / 환경별 설정 (커밋 금지) ###
+.env
+.env.local
+src/main/resources/application-local.yaml
