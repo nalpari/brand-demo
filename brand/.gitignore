@@ -44,6 +44,10 @@ docs/diagrams/*.visual-check.*
 .claude/
 .codex/
 .agent/
+.codegraph
+
+### 내부 참고 자료 (공개 저장소 — 커밋 금지) ###
+docs/ref/
 
 ### 로컬 시크릿 / 환경별 설정 (커밋 금지) ###
 .env
