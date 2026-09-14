@@ -52,7 +52,7 @@ The app starts whether or not the database is reachable — the connection pool 
 dead database is not a startup error. It surfaces on the first request that touches it:
 Swagger UI still loads, `GET /api/samples` returns `500`. `GET /actuator/health` is the
 signal that tells the two apart: `503 {"status":"DOWN"}` means the database, not the code
-([details](okf/api/health.md)).
+([details](../okf/api/health.md)).
 
 ## Tests
 
@@ -84,7 +84,6 @@ src/main/resources/
   application.yaml          datasource + MyBatis settings + jwt.secret
   mapper/SampleMapper.xml   SQL for SampleMapper
   mapper/UserMapper.xml     SQL for UserMapper
-okf/                        knowledge bundle: tables and endpoints, see below
 ```
 
 One package per domain under `com.eland.brand`; `sample/` is the reference implementation
@@ -99,7 +98,7 @@ key back into the object it was handed, which an immutable record cannot accept.
 
 No Flyway, no Liquibase, no JPA `ddl-auto`. Tables are created by hand with `psql`, which
 means **a schema change is not captured by pulling this repository**. The DDL of record
-lives in [`okf/tables/`](okf/tables/index.md); when you add or alter a table, run the DDL
+lives in [`okf/tables/`](../okf/tables/index.md); when you add or alter a table, run the DDL
 *and* update that document, or the next person will not know it happened.
 
 ## Security
@@ -166,13 +165,13 @@ and never triggers a preflight.
 may create an account and call it. What it buys is identity: every call belongs to an
 account, and deleting that account strands its tokens immediately. The `sample` rows
 themselves have no owner and no per-user rule; `role` governs access to *accounts* only.
-See [`okf/api/users.md`](okf/api/users.md) and [`okf/api/auth.md`](okf/api/auth.md).
+See [`okf/api/users.md`](../okf/api/users.md) and [`okf/api/auth.md`](../okf/api/auth.md).
 
 ## Documentation
 
-- [`okf/`](okf/index.md) — an [Open Knowledge Format](https://github.com/GoogleCloudPlatform/open-knowledge-format)
-  bundle: plain markdown describing the [tables](okf/tables/index.md) and the
-  [endpoints](okf/api/index.md). This, not the README, is the reference for what a column
+- [`okf/`](../okf/index.md) — an [Open Knowledge Format](https://github.com/GoogleCloudPlatform/open-knowledge-format)
+  bundle: plain markdown describing the [tables](../okf/tables/index.md) and the
+  [endpoints](../okf/api/index.md). This, not the README, is the reference for what a column
   or an endpoint means, and it is expected to be updated alongside the code that changes.
 - [`CLAUDE.md`](CLAUDE.md) — conventions and traps, written for coding agents but accurate
   for humans: the Spring Boot 4 package moves that break builds, the MyBatis rules above,

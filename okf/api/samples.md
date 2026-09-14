@@ -4,7 +4,7 @@ title: /api/samples
 description: CRUD over the sample table, exposed by SampleController.
 resource: http://localhost:8080/api/samples
 tags: [api, sample]
-generated: { by: claude-code/opus-5, at: 2026-09-11T01:06:00Z }
+generated: { by: claude-code/opus-5, at: 2026-09-11T07:02:03Z }
 status: draft
 ---
 
@@ -47,7 +47,7 @@ small. The cap is a Jackson `maxDocumentLength` set in `BrandApplication`, not a
 It is not decoration: Jackson defaults to an unlimited document and a 100M-character string,
 so without it one `POST` can spend roughly 200MB of heap on a single `name` before the
 service sees it. This is the one API rule with no test — it is not service-layer logic,
-so the testing policy in [CLAUDE.md](../../CLAUDE.md) has nowhere to put it; it was checked
+so the testing policy in [CLAUDE.md](../../brand/CLAUDE.md) has nowhere to put it; it was checked
 by hand over HTTP instead, chunked and unchunked.
 
 # Authentication

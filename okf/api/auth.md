@@ -4,7 +4,7 @@ title: /api/auth
 description: Exchanges a username and password for a bearer JWT; the only way to obtain a token for the rest of the API.
 resource: http://localhost:8080/api/auth/login
 tags: [api, auth]
-generated: { by: claude-code/opus-5, at: 2026-09-11T03:58:16Z }
+generated: { by: claude-code/opus-5, at: 2026-09-11T07:02:03Z }
 status: draft
 ---
 
@@ -87,7 +87,7 @@ covered by `AuthServiceTest`; that it is actually wired to the decoder is covere
 
 From the `JWT_SECRET` environment variable (`jwt.secret` in `application.yaml`), which must
 be at least 32 bytes — HS256 rejects less, and `SecurityConfig` fails startup with that
-message rather than at the first login. An untracked `.env` at the repository root supplies
+message rather than at the first login. An untracked `brand/.env` supplies
 it locally: `application.yaml` imports that file with `optional:file:.env[.properties]`, so
 a real environment variable and a `.env` line reach the same property, and a checkout
 without the file boots unchanged.
@@ -155,4 +155,4 @@ submitted plaintext can be echoed back by a future change that serializes a `Use
 `AuthService` covers login, the account rules of [/api/users](users.md) and the staleness
 check, all under `AuthServiceTest`; the filter-chain rules it depends on are covered by
 `SecurityConfigTest`, the documented exception to the service-layer-only testing policy in
-[CLAUDE.md](../../CLAUDE.md).
+[CLAUDE.md](../../brand/CLAUDE.md).

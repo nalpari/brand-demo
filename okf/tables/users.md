@@ -4,7 +4,7 @@ title: users
 description: Login accounts and their role. The source of identity for every JWT, and the row a token is re-checked against on each request.
 resource: postgresql://localhost:5432/appdb/public/users
 tags: [users, auth]
-generated: { by: claude-code/opus-5, at: 2026-09-09T01:25:00Z }
+generated: { by: claude-code/opus-5, at: 2026-09-11T07:02:03Z }
 status: draft
 sources:
   - id: live-schema
@@ -86,7 +86,7 @@ insert into users (username, password_hash) values ('alice', '$2a$10$...');
 
 # Access
 
-All of it through `UserMapper` (`src/main/resources/mapper/UserMapper.xml`), called only by
+All of it through `UserMapper` (`brand/src/main/resources/mapper/UserMapper.xml`), called only by
 `AuthService`: `insert` on signup, `updatePassword` and `deleteById` from the account
 endpoints, `findByUsername` on login and on the `?username=` lookup, and `findById` on
 signup's re-read for the defaulted columns and when an admin opens another account by id.

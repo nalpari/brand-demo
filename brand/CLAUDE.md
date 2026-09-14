@@ -30,22 +30,6 @@ docker exec -i -e PGPASSWORD=app pg psql -U app -d appdb -c '\dt'
 **Toolchain is pinned to Java 17** (`build.gradle`). Gradle fails outright if no JDK 17
 is installed, even when a newer JDK is present.
 
-## Worktrees
-
-**사용자가 명시적으로 요청할 때만 만든다.** 브랜치를 새로 파거나 기능 작업을 해달라는 요청은
-평소대로 git으로 처리한다.
-
-| 플랫폼 | 위치 |
-| --- | --- |
-| Windows | `C:\workspace\.worktrees\brand\<관광명소>` |
-| macOS / Linux | `~/.worktrees/brand/<관광명소>` |
-
-- **워크트리 디렉터리 이름은 세계 관광명소**, 소문자 kebab-case: `machu-picchu`, `santorini`, `angkor-wat`
-- **브랜치 이름은 포켓몬**, 소문자: `snorlax`, `gengar`, `lapras`
-
-워크트리 생성·진입·정리 전에 [워크트리 절차](okf/development/worktrees.md)를 읽는다.
-추적하지 않는 설정 파일을 추가하면 같은 변경에서 그 문서의 복사 목록도 갱신한다.
-
 ## Testing: TDD, service layer only
 
 API work is test-driven. Write the failing case in `<Domain>ServiceTest` first, run it and
@@ -78,39 +62,9 @@ path *or method* means a case in it, or the change is untested.
 ## Schema management: none
 
 No Flyway/Liquibase, no JPA `ddl-auto` (MyBatis only). Tables are created by hand with
-`psql` and documented in [`okf/tables/`](okf/tables/index.md) — that bundle, not this file,
+`psql` and documented in [`okf/tables/`](../okf/tables/index.md) — that bundle, not this file,
 is the schema reference. Adding a table means running the DDL against the DB, writing its
 `okf/tables/` doc, *and* telling the user; nothing in the repo will create or reconcile it.
-
-## Knowledge bundle (`okf/`)
-
-`okf/` is an [Open Knowledge Format](https://github.com/GoogleCloudPlatform/open-knowledge-format)
-v0.2 bundle: plain markdown + YAML frontmatter describing DB tables, REST endpoints,
-and development procedures. It is documentation, not code — nothing builds or reads it at runtime.
-Every non-`index.md` file needs a non-empty `type` in frontmatter; `index.md` carries
-frontmatter only at the bundle root (`okf_version`).
-
-**`okf/` is the reference; this file is the rules.** Anything the bundle already documents
-— table columns, endpoint contracts, what a field means — belongs there and only there.
-Link to it from here instead of restating it: CLAUDE.md is read in full every session, so
-it stays short, and a fact that lives in one place cannot rot in the other. What belongs
-here is what the bundle does not carry — commands, conventions, and traps that cost a build.
-
-**When you change code, update the bundle in the same change.** Nothing builds, tests,
-or lints `okf/`, so a stale bundle stays stale silently until someone trusts it and is
-wrong. Concretely:
-
-| You changed | Update |
-|---|---|
-| Table DDL, or what a column means | `okf/tables/<table>.md` — the schema table *and* the DDL block |
-| A mapper's SQL, or which layer reads/writes a table | the `# Access` section of that table's doc |
-| An endpoint's path, verb, request body, or status codes | `okf/api/<resource>.md` |
-| The security configuration | the `# Authentication` section of every affected endpoint |
-| Added a table or an endpoint | a new concept doc **and** the directory's `index.md` |
-
-Refresh `generated.at` on any document you edit, and drop its `verified` entries — they
-attested to content that no longer exists. If a code change leaves nothing in `okf/`
-wrong, say so and move on; do not bump timestamps for their own sake.
 
 ## MyBatis conventions
 
@@ -150,11 +104,11 @@ owner or per-user rule; do not describe it as protected or add data that assumes
 - **CORS belongs in the security filter chain, not a `WebMvcConfigurer`.** Explicitly list
   allowed methods; keep credentials off, CSRF disabled, and sessions `STATELESS`.
 
-Before changing authentication or account behavior, read [auth](okf/api/auth.md) and
-[users](okf/api/users.md). Token revocation and clock precision live in
-[The token](okf/api/auth.md#the-token); CORS and CSRF rationale in
-[Authentication](okf/api/auth.md#authentication). If tokens stop verifying after restart,
-check `JWT_SECRET` against [Signing key](okf/api/auth.md#signing-key).
+Before changing authentication or account behavior, read [auth](../okf/api/auth.md) and
+[users](../okf/api/users.md). Token revocation and clock precision live in
+[The token](../okf/api/auth.md#the-token); CORS and CSRF rationale in
+[Authentication](../okf/api/auth.md#authentication). If tokens stop verifying after restart,
+check `JWT_SECRET` against [Signing key](../okf/api/auth.md#signing-key).
 
 ## Spring Boot 4 package/starter moves
 
@@ -187,7 +141,7 @@ second service, the one-`ServiceTest`-per-package rule above depends on it.
 
 `sample/` is the reference implementation of the full stack — `Sample` (POJO) → `SampleMapper` (+ XML) → `SampleService` → `SampleController`,
 tested by `SampleServiceTest` alone. Copy this shape for new features; its runtime contract is
-in [`okf/api/samples.md`](okf/api/samples.md).
+in [`okf/api/samples.md`](../okf/api/samples.md).
 
 No `@RestControllerAdvice`. `spring-boot-starter-validation` is not a dependency, so request
 validation is an inline guard in the service, which is where the test can reach it.

@@ -3,7 +3,7 @@
 출처: [`docs/ref/IA(FO,BO)_스파오(1).xlsx`](../ref/) — FO/BO 시트, 2026-01-07 기준 메뉴 구성도.
 
 **상태: 제안.** 아래 테이블은 아직 DB에 없고 `okf/tables/`에도 없다. 실제 스키마의 기준은
-언제나 [`okf/tables/`](../../okf/tables/index.md)이며, 이 문서는 메뉴 구성도가 요구하는 데이터를
+언제나 [`okf/tables/`](../../../okf/tables/index.md)이며, 이 문서는 메뉴 구성도가 요구하는 데이터를
 먼저 그려 본 설계 초안이다. 테이블을 실제로 만들 때는 CLAUDE.md의 절차대로 DDL을 DB에 적용하고
 `okf/tables/<table>.md`를 쓴 뒤 이 문서의 해당 항목을 그쪽 링크로 바꾼다.
 

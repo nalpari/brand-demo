@@ -4,7 +4,7 @@ title: sample
 description: Reference table used to exercise the MyBatis stack end to end; not business data.
 resource: postgresql://localhost:5432/appdb/public/sample
 tags: [sample, reference]
-generated: { by: claude-code/opus-5, at: 2026-09-01T08:20:58Z }
+generated: { by: claude-code/opus-5, at: 2026-09-11T07:02:03Z }
 status: draft
 sources:
   - id: live-schema
@@ -44,6 +44,6 @@ document — nothing in the repository reconciles the two.
 # Access
 
 Read and written through the [/api/samples endpoint](../api/samples.md). The SQL lives in
-`src/main/resources/mapper/SampleMapper.xml`.
+`brand/src/main/resources/mapper/SampleMapper.xml`.
 
 [^live-schema]: Read from the live database on 2026-09-01.
