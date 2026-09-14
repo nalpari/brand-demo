@@ -1,6 +1,30 @@
 {
   "version": 1,
   "skills": {
+    "code-review-add-feature": {
+      "source": "nalpari/eland-sportsbrand-agent-skills",
+      "sourceType": "github",
+      "skillPath": "code-review-add-feature/SKILL.md",
+      "computedHash": "14fdd2028f122362abba23b974c17b2a28171ab52cc1da39845fd1f4f6518ede"
+    },
+    "code-review-before-commit": {
+      "source": "nalpari/eland-sportsbrand-agent-skills",
+      "sourceType": "github",
+      "skillPath": "code-review-before-commit/SKILL.md",
+      "computedHash": "56f8133773d6fd9220ddc87451103b87882938cac385e4f9e9318a0d614da3b0"
+    },
+    "code-review-final": {
+      "source": "nalpari/eland-sportsbrand-agent-skills",
+      "sourceType": "github",
+      "skillPath": "code-review-final/SKILL.md",
+      "computedHash": "3fc907eb15d9de99b4dcb7591d5f56b652cb55ac8a8901fc9ebe820fea4b29f0"
+    },
+    "code-review-pr": {
+      "source": "nalpari/eland-sportsbrand-agent-skills",
+      "sourceType": "github",
+      "skillPath": "code-review-pr/SKILL.md",
+      "computedHash": "88b05be066de294081303d50057091c3ce2125226d6e2393fcc563a63656e2d3"
+    },
     "design-taste-frontend": {
       "source": "Leonxlnx/taste-skill",
       "sourceType": "github",
