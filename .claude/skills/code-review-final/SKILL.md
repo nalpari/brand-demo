@@ -1,6 +1,7 @@
 ---
 name: code-review-final
-description: 'codex 구독 없이 Claude 만으로 PR 을 적대적 리뷰한다. PR 번호와 브랜치를 받아 체크아웃한 뒤 Opus 5 서브 에이전트 3개가 서로 다른 관점으로 적대적 코드리뷰를 돌리고, 리드 Opus 5 가 그 결과에서 머지 블로커만 걸러내 해결 방안과 함께 표로 정리해 PR 코멘트로 등록한다. "PR 리뷰해줘", "claude 로 리뷰해줘", "codex 없이 리뷰", "머지해도 되는지 봐줘", "적대적 코드리뷰", "리뷰 결과 코멘트로 달아줘" 처럼 머지 전 PR 검증을 요청할 때 사용한다.'
+description: 'codex 구독 없이 Claude 만으로 PR 을 적대적 리뷰한다. PR 번호와 브랜치를 받아 체크아웃한 뒤 Opus 5 서브 에이전트 3개가 서로 다른 관점으로 적대적 코드리뷰를 돌리고, 리드 Opus 5 가 그 결과에서 머지 블로커만 걸러내 해결 방안과 함께 표로 정리해 PR 코멘트로 등록한다. "머지해도 되는지 봐줘", "머지 전 최종 검증", "적대적 코드리뷰", "codex 없이 리뷰", "claude 로 리뷰해줘", "리뷰 결과 코멘트로 달아줘" 처럼 머지 직전 최종 관문 검증을 요청할 때만 사용한다. 일반 PR 검토("PR 리뷰해줘", "#123 리뷰")에는 쓰지 않는다 — code-review-pr 을 쓴다.'
+disable-model-invocation: true
 ---
 
 # Adversarial PR Review (Claude only) → 머지 블로커 코멘트

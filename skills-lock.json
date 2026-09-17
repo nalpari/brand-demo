@@ -17,13 +17,13 @@
       "source": "nalpari/eland-sportsbrand-agent-skills",
       "sourceType": "github",
       "skillPath": "code-review-final/SKILL.md",
-      "computedHash": "3fc907eb15d9de99b4dcb7591d5f56b652cb55ac8a8901fc9ebe820fea4b29f0"
+      "computedHash": "bfbb824ca95a58e07c579b4bcf0d801d5eca38ff4ff3c17081d48b11c37f818f"
     },
     "code-review-pr": {
       "source": "nalpari/eland-sportsbrand-agent-skills",
       "sourceType": "github",
       "skillPath": "code-review-pr/SKILL.md",
-      "computedHash": "88b05be066de294081303d50057091c3ce2125226d6e2393fcc563a63656e2d3"
+      "computedHash": "05cf01a49b8239bb20b801eedbd21adb498481332bb3d80fc87525ed4652058d"
     },
     "design-taste-frontend": {
       "source": "Leonxlnx/taste-skill",
